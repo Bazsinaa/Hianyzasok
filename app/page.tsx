@@ -1,8 +1,14 @@
-"use client";
+
+import Megoldás from "@/app/Megoldás"
 
 export default function HomePage() {
 
-  return (
-    <div></div>
-  );
+  const m: Megoldás = new Megoldás("naplo.txt")
+
+  return( 
+  <div>
+    <div>2. feladat <br />
+    {m.bejegyzésekSzáma}</div>
+  </div>)
+  
 }
