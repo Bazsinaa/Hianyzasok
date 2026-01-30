@@ -24,6 +24,22 @@ export default class Megoldás{
         return db
     }
 
+    get #hiányzásokStat(): Map<string, number> {
+        const stat: Map<string, number> = new Map<string, number>();
+
+        return stat
+    }
+
+    összesHiányzás(napNeve: string, óraSorszáma: number): number {
+        let összesHiányzás: number = 0;
+        for (const e of this.#hiányzások) {
+            if(Megoldás.hetnapja(e.hónap, e.nap) == napNeve && e.voltHiányzás(óraSorszáma)){
+                összesHiányzás += 1;
+            }
+        }
+        return összesHiányzás;
+    }
+
     constructor(forrás: string){
         let aktDátum: string = "";
         fs.readFileSync(forrás)
@@ -43,7 +59,7 @@ export default class Megoldás{
     static hetnapja(honap: number, nap: number): string {
         const napnev: string[] = ["vasarnap", "hetfo", "kedd", "szerda", "csutortok", "pentek", "szombat", ]
         const napszam: number[] = [0, 30, 59, 90, 120, 151, 181, 212, 243, 273, 304, 335]
-        const napsorszam: number = (napszam[honap] + nap) % 7;
+        const napsorszam: number = (napszam[honap - 1] + nap) % 7;
         return napnev[napsorszam]
     }
 }

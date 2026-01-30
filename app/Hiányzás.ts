@@ -4,12 +4,25 @@ export default class Hiányzás{
     #hónap: number;
     #nap: number;
 
+
+    get hianyzasDb(): number {
+        return this.igazoltDb + this.igazolatlanDb
+    }
+
     get igazoltDb(): number {
         return this.#megszámol("X")
     }
 
     get igazolatlanDb(): number {
         return this.#megszámol("I")
+    }
+
+    get hónap(): number {
+        return this.#hónap
+    }
+
+    get nap(): number {
+        return this.#nap
     }
 
 
@@ -31,5 +44,9 @@ export default class Hiányzás{
         return db
     }
 
+    voltHiányzás(óraSorszáma: number): boolean {
+        const óraIndexe = óraSorszáma -1;
+        return this.#hiányzásKód[óraIndexe] == "I" || this.#hiányzásKód[óraIndexe] == "X"
+    }
 
 }
