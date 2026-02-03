@@ -25,6 +25,10 @@ export default class Hiányzás{
         return this.#nap
     }
 
+    get név(): string {
+        return this.#név
+    }
+
 
     constructor(adatsor: string, dátum: string){
         let m: string[] = adatsor.split(" ");

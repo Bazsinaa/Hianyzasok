@@ -26,6 +26,15 @@ export default class Megoldás{
 
     get #hiányzásokStat(): Map<string, number> {
         const stat: Map<string, number> = new Map<string, number>();
+        for (const e of this.#hiányzások) {
+            if (stat.has(e.név)){
+                const régiÉrték: number = stat.get(e.név) as number;
+                stat.set(e.név, régiÉrték + e.hianyzasDb)
+            } else {
+                stat.set(e.név, e.hianyzasDb);
+            }
+            stat.set(e.név, stat.get(e.név) ? 1 : 1)
+        }
 
         return stat
     }
